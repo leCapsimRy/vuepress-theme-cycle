@@ -113,6 +113,6 @@ next: 下一篇文章          #填写格式为‘./文章名.html’（可填�
 具体文章内容...
 ```
 
-## License
+## 协议
 
 [MIT License](https://opensource.org/licenses/MIT) © [leCapsimRy](https://github.com/lecapsimry)
