@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/vuepress-theme-cycle.svg)](https://www.npmjs.com/package/vuepress-theme-cycle)
 [![LICENSE](https://img.shields.io/npm/l/vuepress-theme-cycle.svg)](https://github.com/leCapsimRy/vuepress-theme-cycle/blob/master/LICENSE)
 
-✨ 一款基于VuePress的博客主题
+🚲 一款基于VuePress的博客主题
 
 > 我的[个人博客](https://github.com/leCapsimRy/blog)也在使用该主题，因为目前的需求都是基于该博客的需求而定的，而且目前的版本也没有完美的承载这些需求，我会逐渐将这些功能更新到主题当中的。当然，对于这款主题如果有其他需求的朋友可以在issues当中发言，如果可行我会尽快加入最新的版本当中。
 
