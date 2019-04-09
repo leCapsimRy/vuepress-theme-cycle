@@ -10,7 +10,7 @@
 ## 安装
 
 ```shell
-$ npm i vuepress-theme-cycle --save-dev
+$ npm install vuepress-theme-cycle --save-dev
 ```
 
 ## 配置
