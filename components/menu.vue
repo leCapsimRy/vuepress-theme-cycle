@@ -24,6 +24,8 @@ export default {
             if(this.$page.path === '/') this.curr=0
             else if(this.$page.path === '/posts/') this.curr=1
             else if(this.$page.path.indexOf('posts')!== -1 ) this.curr=-1
+            else if(this.$page.path === '/gallery/' ) this.curr=2
+            else if(this.$page.path === '/story/' ) this.curr=3
             else if(this.$page.path === '') this.curr=-1
             else this.curr=-1
 

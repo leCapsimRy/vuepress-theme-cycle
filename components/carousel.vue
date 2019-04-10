@@ -12,14 +12,14 @@
                   :key="index">
                       <div class="item">
                             <div class="a-img">
-                                <div :style="{'backgroundImage': 'url(images/posts/'+carousel.frontmatter.image+')'}"></div>
+                                <div :style="{'backgroundImage': 'url(images/posts/'+carousel.frontmatter.title+'.jpg)'}"></div>
                             </div>
                             <div class="h">
                                 <div class="num">{{ '0'+(~~index+1) }}</div>
                                 <span>
                                     <router-link 
                                     :to="carousel.path">
-                                    {{ carousel.frontmatter.name }}
+                                    {{ carousel.frontmatter.title }}
                                     </router-link>
                                 </span>
                             </div>
@@ -27,7 +27,7 @@
                             <div class="p-content" :class="checked ===carousel ? 'active':''">
                                 <div class="close" @click="close(carousel)"></div>
                                 <div class="w">
-                                    <h5>{{ carousel.frontmatter.name }}</h5>
+                                    <h5>{{ carousel.frontmatter.title }}</h5>
                                     <span class="date">{{ carousel.frontmatter.createTime }}</span>
                                     <p>{{ carousel.frontmatter.introduce }}</p>
                                 </div>
@@ -53,7 +53,7 @@
           class="owl-dots"
           v-if="data[1] && data[1].length">
               <div 
-                :class="index==~~data[3]-2?'owl-dot active':'owl-dot'"
+                :class="index==~~data[3]?'owl-dot active':'owl-dot'"
                 v-for="(carousel, index) in data[1]"
                 :key="index">
                   <span>{{ '0'+(~~index+1) }}</span>
@@ -70,7 +70,7 @@ export default {
     return {
       checked:false,
       distance:0,
-      currentIndex:2,
+      currentIndex:0,
       imgWidth:0,
       length:0,
       transitionEnd:true
@@ -78,7 +78,7 @@ export default {
   },
   mounted() {
       this.imgWidth=this.$el.firstChild.firstChild.firstChild.firstChild.clientWidth;
-      this.$el.lastChild.style.backgroundImage='url(images/posts/'+this.$site.pages[3].frontmatter.image+')';
+      this.$el.lastChild.style.backgroundImage='url(images/posts/'+this.data[1][1].frontmatter.title+'.jpg)';
     //   window.setInterval(() => {
     //             this.move(this.imgWidth, -1)
     //         }, 5000)
@@ -100,18 +100,20 @@ export default {
         if (!this.transitionEnd) return  //这里是闸
         this.transitionEnd = false       //开闸以后再把闸关上
         direction === -1 ? this.currentIndex++ : this.currentIndex--
-        if (this.currentIndex > this.$site.pages.length-1){
-            this.currentIndex = 2;  
+        if (this.currentIndex > this.length-1){
+            this.currentIndex = 0;  
         }
-        if (this.currentIndex < 2) {
-            this.currentIndex = this.$site.pages.length-1
+        if (this.currentIndex < 0) {
+            this.currentIndex = this.length-1
         }
         
         let index = this.currentIndex+1;
-        if(index > this.$site.pages.length-1){
-            index = 2;
+        if(index > this.length-1){
+            index = 0;
         }
-        this.$el.lastChild.style.backgroundImage='url(images/posts/'+this.$site.pages[~~index].frontmatter.image+')';
+        console.log(this.currentIndex)
+        console.log(this.data[1])
+        this.$el.lastChild.style.backgroundImage='url(images/posts/'+this.data[1][~~index].frontmatter.title+'.jpg)';
         let destination=''
         if (this.distance === 0){
             destination = offset * direction
@@ -155,11 +157,20 @@ export default {
             return [
                 this.checked,
                 this.$site.pages
-                .filter(item => item.path !== '/'&&item.path !== '/posts/'),
+                .filter(
+                    item => item.path !== '/'
+                    &&item.path !== '/posts/'
+                    &&item.path !== '/gallery/'
+                    &&item.path !== '/story/'),
                 this.distance,
                 this.currentIndex,
                 this.imgWidth,
-                this.length = this.$site.pages.length-2
+                this.length = this.$site.pages
+                .filter(
+                    item => item.path !== '/'
+                    &&item.path !== '/posts/'
+                    &&item.path !== '/gallery/'
+                    &&item.path !== '/story/').length
             ]
         },
         containerStyle() {

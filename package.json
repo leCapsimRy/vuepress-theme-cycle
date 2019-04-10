@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-cycle",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Vuepress theme - Cycle",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "webpack-dev-middleware": "3.6.0",
+    "vue-image-swipe": "^1.0.5",
     "cryptiles": ">=4.1.2"
   }
 }

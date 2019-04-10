@@ -43,13 +43,13 @@
                 </div>
                 <router-link 
                 :to="blog.path" 
-                :style="{'backgroundImage': 'url(../images/posts/'+blog.frontmatter.image+')'}">
+                :style="{'backgroundImage': 'url(../images/posts/'+blog.frontmatter.title+'.jpg)'}">
                 </router-link>
               </div>
               <div class="content">
                 <h4>
                   <router-link :to="blog.path">
-                    {{ blog.frontmatter.name }}
+                    {{ blog.frontmatter.title }}
                   </router-link>
                 </h4>
                 <div class="date">{{ blog.frontmatter.createTime }}</div>
@@ -78,7 +78,11 @@ export default {
     data() {
       return [
         this.$site.pages
-                .filter(item => item.path !== '/'&&item.path !== '/posts/')
+                .filter(
+                  item => item.path !== '/'
+                  &&item.path !== '/posts/'
+                  &&item.path !== '/gallery/'
+                  &&item.path !== '/story/')
       ]
     }
   }
@@ -88,6 +92,7 @@ export default {
 #layout-container{
     background:rgba(0,0,0,0);
     padding-top:64px;
+    position: relative;
     .body-grid-lines {
       text-align: justify;
       position: absolute;
@@ -96,7 +101,7 @@ export default {
       bottom: 0;
       max-width: 950px;
       width: 90%;
-      height:calc(~'100% + 64px');
+      height:100%;
       overflow: hidden;
       -moz-transform: translate(-50%, 0%);
       -ms-transform: translate(-50%, 0%);
@@ -117,7 +122,7 @@ export default {
     }
     .container{
         background:rgba(0,0,0,0);
-        min-height:100vh;
+        min-height:calc(~'100vh - 297px');
         position: relative;
         margin-right: auto;
         margin-left: auto;

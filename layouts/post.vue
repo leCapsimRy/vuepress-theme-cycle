@@ -3,10 +3,10 @@
         <a-layout-content class="post">
             <div 
             class="post-banner"
-            :style="{'backgroundImage': 'url(../images/posts/'+this.$page.frontmatter.image+')'}">
+            :style="{'backgroundImage': 'url(../images/posts/'+this.$page.frontmatter.title+'.jpg)'}">
                 <div class="container">
                     <div class="cell">
-                        <h1 class="h">{{ this.$page.frontmatter.name }}</h1>
+                        <h1 class="h">{{ this.$page.frontmatter.title }}</h1>
                         <div class="date">{{ this.$page.frontmatter.createTime }}</div>
                     </div>
                 </div>

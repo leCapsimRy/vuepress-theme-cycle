@@ -34,7 +34,7 @@
                             v-for="(blog, index) in data[0]"
                             :key="index">
                                 <dt>
-                                    <div :style="{'backgroundImage': 'url(../images/posts/'+$withBase(blog.frontmatter.image)+')'}"></div>
+                                    <div :style="{'backgroundImage': 'url(../images/posts/'+blog.frontmatter.title+'.jpg)'}"></div>
                                 </dt>
                             </dl>
                         </div>
@@ -65,7 +65,11 @@ export default {
     data() {
       return [
         this.$site.pages
-                .filter(item => item.path !== '/'&&item.path !== '/posts/')
+                .filter(
+                    item => item.path !== '/'
+                    &&item.path !== '/posts/'
+                    &&item.path !== '/gallery/'
+                    &&item.path !== '/story/')
       ]
     }
   }
@@ -80,6 +84,7 @@ export default {
     padding: 20px 0;
     font-weight: 300;
     height:auto;
+    z-index:10;
     .container{
         position: relative;
         margin-right: auto;

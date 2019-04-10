@@ -4,6 +4,8 @@
     <Header></Header>
     <Container v-if="isHome"></Container >
     <VBlog v-else-if="isBlog"></VBlog>
+    <Gallery v-else-if="isGallery"></Gallery>
+    <Story v-else-if="isStory"></Story>
     <Post v-else></Post>
   </div>
 </template>
@@ -13,6 +15,8 @@ import Header from './layouts/header'
 import Container from './layouts/container'
 import VBlog from './layouts/vblog'
 import Post from './layouts/post'
+import Gallery from './layouts/gallery'
+import Story from './layouts/story'
 export default {
   data() {
     return {
@@ -24,7 +28,9 @@ export default {
     Header,
     Container,
     VBlog,
-    Post
+    Post,
+    Gallery,
+    Story
   },
   mounted() {
     this.dis=false
@@ -35,6 +41,12 @@ export default {
     },
     isBlog() {
       return this.$page.path === '/posts/';
+    },
+    isGallery() {
+      return this.$page.path === '/gallery/';
+    },
+    isStory() {
+      return this.$page.path === '/story/';
     }
   }
 }
