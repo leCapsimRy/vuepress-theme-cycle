@@ -11,7 +11,7 @@
 
 - [x] 首页
 - [x] 博客
-- [ ] 画廊（图片展览馆）
+- [x] 画廊（图片展览馆）
 - [ ] 故事与酒（随机匹配文章，情感分享）
 - [x] 博客列表页
 - [x] 文章页
@@ -19,6 +19,26 @@
 - [ ] 搜索
 - [ ] 评论
 - [ ] 订阅
+
+## 版本更新
+
+### v0.6.0（2019/4/10）
+
+1.增加了新的页面-画廊`gallery/`
+
+> 现在可以将每篇文章对应的图片放大查看了，还增加了图片下载的功能；
+
+2.增加了新页面-故事与酒`story/`
+
+> 空白留存页
+
+3.调整了文章页yaml的格式
+
+> 删除了name和images项
+
+4.调整了图片获取方式
+
+> `public/images/posts/`文件下，以`文章名.jpg`的方式命名后，主题会自动取得文章和图片的对应关系，另外目前文章图片只支持`jpg`格式，且文章名里如果想要添加其他符号，建议使用`-`，例如：`文章名-1-1.md`，对应图片名称则是`文章名-1-1.jpg`
 
 ## 安装
 
@@ -36,7 +56,7 @@ module.exports = {
 }
 ```
 
-## themeConfig
+## themeConfig（v0.6.0）
 
 在配置文件`.vuepress/config.js`当中，增加`themeConfig`配置项，并按照如下进行配置：
 
@@ -56,6 +76,8 @@ themeConfig: {
       menus:[
         {name:'首页',value:'home',url:'/'},
         {name:'博客',value:'blog',url:'/posts/'}
+        {name:'画廊',value:'gallery',url:'/gallery/'}
+        {name:'故事与酒',value:'story',url:'/story/'}
       ],
       //其他社交链接
       links:[
@@ -78,7 +100,7 @@ themeConfig: {
     }
 ```
 
-## 目录格式
+## 目录格式（v0.6.0）
 
 如下文件目录为根文件夹`docs`的具体格式，除两个`posts/`文件夹下的内容名称可以随意修改外，其他都名称不可修改：
 
@@ -86,9 +108,9 @@ themeConfig: {
 ├── .vuepress
 |   ├── public/
 |   |   ├── images/
-|   |   |   ├── posts/
-|   |   |   |   ├── post1.png
-|   |   |   |   ├── post2.png
+|   |   |   ├── posts/                   
+|   |   |   |   ├── post1-1.jpg
+|   |   |   |   ├── post2-2.jpg
 |   |   |   |   ├── ...
 |   |   |   ├── 404.png
 |   |   |   ├── avatar.jpg
@@ -97,18 +119,20 @@ themeConfig: {
 ├── README.md
 ├── posts/
 |   ├── README.md
-|   ├── post1.md
-|   ├── post2.md
+|   ├── post1-1.md
+|   ├── post2-2.md
 |   ├── ...
+├── gallery/
+|   ├── README.md
+├── story/
+|   ├── README.md
 ```
 
-## 文章配置项
+## 文章配置项（v0.6.0）
 
 ```yaml
 ---
 title: 标题
-image: 文章大图           #对应public/images/posts/文件夹下的图片文件，无需填写路径。例如：post1.png
-name: 文章名字            #同title
 createTime: 发文时间
 introduce: 文章介绍
 tags:                    #文章分类
