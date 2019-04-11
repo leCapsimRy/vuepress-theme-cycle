@@ -1,4 +1,4 @@
 module.exports = {
-    layoutDir: 'layouts',
-    plugins: ['@vuepress/last-updated']
-  }
+  layoutDir: 'layouts',
+  plugins: ['@vuepress/last-updated']
+}

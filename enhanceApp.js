@@ -6,9 +6,6 @@
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less'
 
-import VueImageSwipe from 'vue-image-swipe'
-import 'vue-image-swipe/dist/vue-image-swipe.css'
-
 import 'animate.css'
 import './styles/index.less'
 import './fonts/montserrat.less'
@@ -21,5 +18,4 @@ export default ({
 }) => {
   // ...做一些其他的应用级别的优化
   Vue.use(Antd)
-  Vue.use(VueImageSwipe)
 }

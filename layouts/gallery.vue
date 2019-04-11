@@ -16,7 +16,7 @@
                         class="article">
                             <div 
                             class="pi-w"
-                            @click="preview(blog.frontmatter.title,index)">
+                            @click="handlePreview('../images/posts/'+blog.frontmatter.title+'.jpg')">
                                 <router-link 
                                 to="" 
                                 :style="{'backgroundImage': 'url(../images/posts/'+blog.frontmatter.title+'.jpg)'}">
@@ -40,6 +40,9 @@
             </div>
         </a-layout-content>
         <Footer></Footer> 
+        <a-modal class="swiper" :visible="previewVisible" :footer="null" @cancel="handleCancel">
+            <img class="swiper-img" style="width: 100%" :src="images" />
+        </a-modal>
     </a-layout>
 </template>
 <script>
@@ -49,27 +52,18 @@ import Footer from './footer'
 export default {
     data() {
         return {
-            images:[],
+            previewVisible: false,
+            previewImage: '',
+            images:[]
         }
-    },
-    components:{
-        Footer
-    },
-    mounted() {
-        this.$site.pages
-                .filter(
-                    item => item.path !== '/'
-                    &&item.path !== '/posts/'
-                    &&item.path !== '/gallery/'
-                    &&item.path !== '/story/')
-                .forEach((r)=>{
-                    this.images.push('../images/posts/'+r.frontmatter.title+'.jpg')
-                })
     },
     watch:{
         images:function(val){
             this.images=val;
         }
+    },
+    components:{
+        Footer
     },
     computed: {
     data() {
@@ -91,12 +85,14 @@ export default {
         alink.download = title; //图片名
         alink.click();
     },
-    preview(title,index) {
-        this.$imagePreview({
-            images: this.images,
-            index: index,
-        })
-    }
+    handlePreview (file) {
+        console.log(file)
+      this.images = file
+      this.previewVisible = true
+    },
+    handleCancel () {
+      this.previewVisible = false
+    },
   }
 }
 </script>

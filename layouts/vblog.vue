@@ -65,6 +65,7 @@
       </div>
     </a-layout-content>
     <Footer></Footer>
+    <a-back-top />
   </a-layout>
 </template>
 <script>
