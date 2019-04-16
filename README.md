@@ -7,7 +7,7 @@
 
 > 我的[个人博客](https://github.com/leCapsimRy/blog)也在使用该主题，因为目前的需求都是基于该博客的需求而定的，而且目前的版本也没有完美的承载这些需求，我会逐渐将这些功能更新到主题当中的。当然，对于这款主题如果有其他需求的朋友可以在issues当中发言，如果可行我会尽快加入最新的版本当中。
 
-## 待办备忘
+## 主题完成度
 
 - [x] 首页
 - [x] 博客
@@ -18,9 +18,15 @@
 - [ ] 分类列表页
 - [ ] 搜索
 - [x] 评论
+- [ ] 文章浏览统计
 - [ ] 订阅
+- [ ] 移动端支持
 
 ## 版本更新
+
+### v0.6.8（2019/4/15）
+
+> 增加了文章的评论功能，需要在主题配置`themeConfig`当中增加`id`和`key`的配置项（评论功能使用的是[Valine](https://valine.js.org/quickstart.html)，使用前请先按照提示在[LeanCloud](https://leancloud.cn/)注册，将相应的`APP ID`和`APP Key`值分别填入`themeConfig`中的`id`和`key`）
 
 ### v0.6.6（2019/4/10）
 
@@ -56,51 +62,44 @@ module.exports = {
 }
 ```
 
-## themeConfig（v0.6.6）
+## themeConfig（v0.6.8）
 
 在配置文件`.vuepress/config.js`当中，增加`themeConfig`配置项，并按照如下进行配置：
 
 ```js
 themeConfig: { 
-      //头像路径
-      avatar:'images/avatar.jpg',
-      //个人介绍
-      about:'',
-      //邮箱
-      mail:'',
-      //微信号
-      wechat:'',
-      //订阅文案
-      subscription:'',
-      //导航菜单（v0.5.0只支持首页与博客）
-      menus:[
+      avatar:'images/avatar.jpg',                 //头像路径
+      about:'',                                   //个人介绍
+      mail:'',                                    //邮箱
+      wechat:'',                                  //微信号
+      subscription:'',                            //订阅文案
+      id:'',                                      //[LeanCloud](https://leancloud.cn/)的APP ID                       v0.6.8新增
+      key:'',                                     //[LeanCloud](https://leancloud.cn/)的APP Key                      v0.6.8新增
+      menus:[                                     //导航菜单（v0.5.0只支持首页与博客）
         {name:'首页',value:'home',url:'/'},
         {name:'博客',value:'blog',url:'/posts/'}
         {name:'画廊',value:'gallery',url:'/gallery/'}
         {name:'故事与酒',value:'story',url:'/story/'}
       ],
-      //其他社交链接
-      links:[
+      links:[                                     //其他社交链接
         {name:'github',url:''},
         {name:'weibo',url:''},
         {name:'instagram',url:'/'}
       ],
-      //文章分类（v0.5.0暂未支持分类筛选）
-      categories:[
+      categories:[                                //文章分类（v0.5.0暂未支持分类筛选）
         {name:'古韵',url:'/posts/'},
         {name:'当下',url:'/posts/'},
         {name:'斗酒话评',url:'/posts/'},
         {name:'酒巷小调',url:'/posts/'}
       ],
-      //copyright部分分段落展示
-      copyright1: '',
+      copyright1: '',                             //copyright部分分段落展示
       copyright2: '',
       copyright3: '',
       copyright4: '',
     }
 ```
 
-## 目录格式（v0.6.6）
+## 目录格式（v0.6.8）
 
 如下文件目录为根文件夹`docs`的具体格式，除两个`posts/`文件夹下的内容名称可以随意修改外，其他都名称不可修改：
 
@@ -128,7 +127,7 @@ themeConfig: {
 |   ├── README.md
 ```
 
-## 文章配置项（v0.6.6）
+## 文章配置项（v0.6.8）
 
 ```yaml
 ---
