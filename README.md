@@ -10,19 +10,24 @@
 ## 主题完成度
 
 - [x] 首页
-- [x] 博客
-- [x] 画廊（图片展览馆）
-- [ ] 故事与酒（随机匹配文章，情感分享）
-- [x] 博客列表页
+- [x] 三杯（博客列表）
+- [x] 两盏（图片展览馆）
+- [ ] 淡酒（随机匹配文章，情感分享）
 - [x] 文章页
-- [ ] 分类列表页
-- [ ] 搜索
+- ~~[ ] 分类列表页~~
+- [x] 搜索
 - [x] 评论
 - [x] 文章浏览统计
 - [ ] 订阅
-- [ ] 移动端支持
+- [x] 移动端支持
 
 ## 版本更新
+
+### v0.7.0（2019/4/25）
+
+1.整体样式更新，现在变得更加简洁了
+2.做了移动端适配，现在通过移动端访问也不用担心页面走形
+3.修改了文章搜索功能，现在的搜索结果是所有文章的标题列表
 
 ### v0.6.9（2019/4/16）
 
@@ -66,7 +71,7 @@ module.exports = {
 }
 ```
 
-## themeConfig（v0.6.9）
+## themeConfig（v0.7.0）
 
 在配置文件`.vuepress/config.js`当中，增加`themeConfig`配置项，并按照如下进行配置：
 
@@ -79,7 +84,7 @@ themeConfig: {
       subscription:'',                            //订阅文案
       id:'',                                      //[LeanCloud](https://leancloud.cn/)的APP ID                       v0.6.8新增
       key:'',                                     //[LeanCloud](https://leancloud.cn/)的APP Key                      v0.6.8新增
-      menus:[                                     //导航菜单（v0.5.0只支持首页与博客）
+      menus:[                                     //导航菜单（v0.7.0只支持首页、博客和画廊）
         {name:'首页',value:'home',url:'/'},
         {name:'博客',value:'blog',url:'/posts/'}
         {name:'画廊',value:'gallery',url:'/gallery/'}
@@ -90,20 +95,18 @@ themeConfig: {
         {name:'weibo',url:''},
         {name:'instagram',url:'/'}
       ],
-      categories:[                                //文章分类（v0.5.0暂未支持分类筛选）
+      categories:[                                //文章分类（v0.7.0暂未支持分类筛选）
         {name:'古韵',url:'/posts/'},
         {name:'当下',url:'/posts/'},
         {name:'斗酒话评',url:'/posts/'},
         {name:'酒巷小调',url:'/posts/'}
       ],
-      copyright1: '',                             //copyright部分分段落展示
-      copyright2: '',
-      copyright3: '',
-      copyright4: '',
+      footer: '©2018-2019 XXX博客',
+      copyright: '备案号'
     }
 ```
 
-## 目录格式（v0.6.9）
+## 目录格式（v0.7.0）
 
 如下文件目录为根文件夹`docs`的具体格式，除两个`posts/`文件夹下的内容名称可以随意修改外，其他都名称不可修改：
 
@@ -131,7 +134,7 @@ themeConfig: {
 |   ├── README.md
 ```
 
-## 文章配置项（v0.6.9）
+## 文章配置项（v0.7.0）
 
 ```yaml
 ---
@@ -141,10 +144,6 @@ introduce: 文章介绍
 tags:                    #文章分类
 - name: 分类1
 - name: 分类2
-- name: ...
-titles:                  #长文一级标题锚点定位（可填，或直接移除该分支）
-- name: 标题1
-- name: 标题2
 - name: ...
 prev: 上一篇文章          #填写格式为‘./文章名.html’（可填，或直接移除该分支）
 next: 下一篇文章          #填写格式为‘./文章名.html’（可填，或直接移除该分支）

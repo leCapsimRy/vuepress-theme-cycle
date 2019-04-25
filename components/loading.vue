@@ -110,7 +110,7 @@ export default {
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #1890ff;
+            background-color: #e9432b;
             -webkit-animation: preloader-foldCubeAngle 2.4s infinite linear both;
                     animation: preloader-foldCubeAngle 2.4s infinite linear both;
             -webkit-transform-origin: 100% 100%;

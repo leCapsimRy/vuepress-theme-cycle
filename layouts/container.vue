@@ -21,10 +21,13 @@ export default {
 #layout-container{
     background:rgba(0,0,0,0);
     position: relative;
-    top:64px;
     .container{
         background:rgba(0,0,0,0);
-        height:calc(~'100vh - 64px');
+        height:100vh;
+        float:left;
+        padding-left:792px;
+        padding-right:96px;
+        padding-top:53px;
     }
 }
 </style>

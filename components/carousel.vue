@@ -4,27 +4,24 @@
           <div class="owl-outer">
               <div 
               class="owl-stage"
+              id="owl-stage"
               :style="containerStyle"
-              v-if="data[1] && data[1].length">
+              v-if="data[1] && data[1].length"
+              @touchstart="touchstart"
+              @touchend="touchend">
                   <div 
                   class="owl-item"
                   v-for="(carousel, index) in data[1]"
-                  :key="index">
+                  :key="index"
+                  :style="{'width':data[3]+'px'}">
                       <div class="item">
                             <div class="a-img">
                                 <div :style="{'backgroundImage': 'url(images/posts/'+carousel.frontmatter.title+'.jpg)'}"></div>
                             </div>
-                            <div class="h">
-                                <div class="num">{{ '0'+(~~index+1) }}</div>
-                                <span>
-                                    <router-link 
-                                    :to="carousel.path">
-                                    {{ carousel.frontmatter.title }}
-                                    </router-link>
-                                </span>
-                            </div>
-                            <div class="btn" @click="infoShow(carousel)">+</div>
-                            <div class="p-content" :class="checked ===carousel ? 'active':''">
+                            <!-- <div class="btn" @click="infoShow(carousel)">
+                                <a-icon type="plus-circle" />
+                            </div> -->
+                            <!-- <div class="p-content" :class="checked ===carousel ? 'active':''">
                                 <div class="close" @click="close(carousel)"></div>
                                 <div class="w">
                                     <h5>{{ carousel.frontmatter.title }}</h5>
@@ -32,9 +29,9 @@
                                     <p>{{ carousel.frontmatter.introduce }}</p>
                                 </div>
                                 <router-link class="link" :to="carousel.path">
-                                    See full project
+                                    查看文章
                                 </router-link>
-                            </div>
+                            </div> -->
                       </div>
                   </div>
               </div>
@@ -42,29 +39,18 @@
           <div class="owl-nav">
               <div class="owl-prev" @click="move(imgWidth, -1)">
             <!-- <div class="owl-prev"> -->
-                  <a-icon type="right" />
+                  <a-icon type="swap-right" />
               </div>
               <div class="owl-next" @click="move(imgWidth, 1)">
             <!-- <div class="owl-next"> -->
-                  <a-icon type="left" />
-              </div>
-          </div>
-          <div 
-          class="owl-dots"
-          v-if="data[1] && data[1].length">
-              <div 
-                :class="index==~~data[3]?'owl-dot active':'owl-dot'"
-                v-for="(carousel, index) in data[1]"
-                :key="index">
-                  <span>{{ '0'+(~~index+1) }}</span>
+                  <a-icon type="swap-left" />
               </div>
           </div>
       </div>
-      <div class="next-slide"></div>
   </div>
 </template>
 <script>
-
+import '../index.js'
 export default {
   data() {
     return {
@@ -77,8 +63,12 @@ export default {
     }
   },
   mounted() {
-      this.imgWidth=this.$el.firstChild.firstChild.firstChild.firstChild.clientWidth;
-      this.$el.lastChild.style.backgroundImage='url(images/posts/'+this.data[1][1].frontmatter.title+'.jpg)';
+      this.imgWidth=this.$el.clientWidth; 
+      window.onresize = () => {
+      return (() => {
+        this.imgWidth=this.$el.clientWidth; 
+      })()
+    }
     //   window.setInterval(() => {
     //             this.move(this.imgWidth, -1)
     //         }, 5000)
@@ -87,7 +77,6 @@ export default {
         imgWidth:function(val){
             this.imgWidth=val;
         }
-
     },
   methods: {
     infoShow(item){
@@ -111,9 +100,6 @@ export default {
         if(index > this.length-1){
             index = 0;
         }
-        console.log(this.currentIndex)
-        console.log(this.data[1])
-        this.$el.lastChild.style.backgroundImage='url(images/posts/'+this.data[1][~~index].frontmatter.title+'.jpg)';
         let destination=''
         if (this.distance === 0){
             destination = offset * direction
@@ -142,7 +128,23 @@ export default {
                 if (this.des > 0) this.distance = this.imgWidth*(1-this.length)
             }
         }
-    }
+    },
+    show(index){
+      this.changePointX=this.startPointX;
+      let slider = document.getElementById('owl-stage');
+      slider.style.marginLeft=`-${this.imgWidth}px`;
+    },
+    touchstart(e){
+      this.start = e.changedTouches[0].pageX;
+    },
+    touchend(e){
+        this.endX = e.changedTouches[0].pageX;
+        if(this.start > this.endX){//prev
+            this.move(this.imgWidth, -1)
+        }else{//next
+            this.move(this.imgWidth, 1)
+        }
+    },
 
   },
   computed: {
@@ -163,7 +165,6 @@ export default {
                     &&item.path !== '/gallery/'
                     &&item.path !== '/story/'),
                 this.distance,
-                this.currentIndex,
                 this.imgWidth,
                 this.length = this.$site.pages
                 .filter(
@@ -185,12 +186,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .carousel{
-    width:100%;
-    height:100%;
     float: left;
     .panel{
         margin-right: 115px;
-        width: calc(~'100% - 115px');
+        width: 100%;
         height:100%;
         float:left;
         position: relative;
@@ -198,7 +197,7 @@ export default {
             width:100%;
             height:100%;
             position: relative;
-            overflow:hidden;
+            // overflow:hidden;
             .owl-stage{
                 position: relative;
                 height:100%;
@@ -211,7 +210,6 @@ export default {
                     position: relative;
                     min-height: 1px;
                     float: left;
-                    width:calc(~'100vw - 315px');
                     height:100%;
                     .item{
                         position: relative;
@@ -220,7 +218,6 @@ export default {
                         height:100%;
                         .a-img{
                             position: relative;
-                            margin-left: 60px;
                             overflow: hidden;
                             width:100%;
                             height:100%;
@@ -239,58 +236,14 @@ export default {
                                 transition: all 0.5s ease;
                             }
                         }
-                        .h{
-                            font-weight: bold;
-                            font-size: 14px;
-                            position: absolute;
-                            left: 18px;
-                            top: 0;
-                            border-top: 2px solid;
-                            width: 20px;
-                            text-align: center;
-                            -webkit-transition: all 0.5s ease;
-                            -moz-transition: all 0.5s ease;
-                            -o-transition: all 0.5s ease;
-                            -ms-transition: all 0.5s ease;
-                            transition: all 0.5s ease;
-                            .num{
-                                font-size: 12px;
-                                color: #a2a2a2;
-                                margin: 30px 0 10px;
-                            }
-                            span{
-                                width: 600px;
-                                display: block;
-                                text-align: left;
-                                line-height: 20px;
-                                -moz-transform: rotate(90deg);
-                                -ms-transform: rotate(90deg);
-                                -webkit-transform: rotate(90deg);
-                                -o-transform: rotate(90deg);
-                                transform: rotate(90deg);
-                                -moz-transform-origin: 0% 100%;
-                                -ms-transform-origin: 0% 100%;
-                                -webkit-transform-origin: 0% 100%;
-                                -o-transform-origin: 0% 100%;
-                                transform-origin: 0% 100%;
-                                white-space: nowrap;
-                                a{
-                                    color:#000;
-                                }
-                            }
-                        }
                         .btn{
-                            background:rgba(24,144,255,1);
                             font-size: 25.35px;
                             position: absolute;
-                            top: 0;
-                            right: 0;
-                            width: 55px;
-                            line-height: 55px;
-                            height: 55px;
+                            left: 0;
+                            bottom: 54px;
                             cursor: pointer;
                             text-align: center;
-                            color: #fff;
+                            color: #52555a;
                             font-weight: bold;
                             -webkit-transition: all 0.3s ease;
                             -moz-transition: all 0.3s ease;
@@ -300,22 +253,22 @@ export default {
                             z-index: 1;
                         }
                         .btn:hover{
-                            background:rgba(24,144,255,0.8);
+                            color:#e9432b;
                         }
                         .p-content{
-                            right: 0;
-                            left: auto;
+                            left: 0;
+                            right: auto;
                             width: 340px;
-                            top: 0;
-                            bottom: auto;
-                            -moz-transform: translate(100%, -100%);
-                            -ms-transform: translate(100%, -100%);
-                            -webkit-transform: translate(100%, -100%);
-                            -o-transform: translate(100%, -100%);
-                            transform: translate(100%, -100%);
+                            bottom: 0;
+                            top: auto;
+                            -moz-transform: translate(-100%, 62%);
+                            -ms-transform: translate(-100%, 62%);
+                            -webkit-transform: translate(-100%, 62%);
+                            -o-transform: translate(-100%, 62%);
+                            transform: translate(-100%, 62%);
                             padding: 40px 35px 60px;
 
-                            background: #2D3142;
+                            background: #18191b;
                             color: #fff;
                             position: absolute;
                             z-index: 2;
@@ -416,11 +369,11 @@ export default {
                             }
                         }
                         .active{
-                            -moz-transform: translate(0%, 0%);
-                            -ms-transform: translate(0%, 0%);
-                            -webkit-transform: translate(0%, 0%);
-                            -o-transform: translate(0%, 0%);
-                            transform: translate(0%, 0%);
+                            -moz-transform: translate(0%, -38%);
+                            -ms-transform: translate(0%, -38%);
+                            -webkit-transform: translate(0%, -38%);
+                            -o-transform: translate(0%, -38%);
+                            transform: translate(0%, -38%);
                         }
                     }
                 }
@@ -428,9 +381,9 @@ export default {
         }
         .owl-nav{
             position: absolute;
-            bottom: 0;
-            right: -10px;
-            color: #fff;
+            bottom: 48px;
+            right: -5px;
+            color: #52555a;
             width: 65px;
             div{
                 width: 55px;
@@ -446,109 +399,35 @@ export default {
             }
             .owl-prev{
                 cursor: pointer;
-                // color:#1890ff;
                 -webkit-user-select: none;
                 -khtml-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
+                position: absolute;
+                bottom:0;
+                right:-55px;
             }
             .owl-next{
                 position: absolute;
-                bottom: 55px;
-                background: #1890ff;
                 cursor: pointer;
+                left:0;
+                bottom:0;
                 -webkit-user-select: none;
                 -khtml-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
             }
-        }
-        .owl-dots{
-            margin-top: -55px;
-            right: -65px;
-
-            counter-reset: slides-num;
-            position: absolute;
-            top: 50%;
-            font-size: 14px;
-            font-weight: bold;
-            -moz-transform: translate(0%, -50%);
-            -ms-transform: translate(0%, -50%);
-            -webkit-transform: translate(0%, -50%);
-            -o-transform: translate(0%, -50%);
-            transform: translate(0%, -50%);
-            .owl-dot{
-                display: block;
-                opacity: 0.4;
-                -webkit-transition: all 0.3s ease;
-                -moz-transition: all 0.3s ease;
-                -o-transition: all 0.3s ease;
-                -ms-transition: all 0.3s ease;
-                transition: all 0.3s ease;
-                position: relative;
-
-                cursor: pointer;
-                -webkit-user-select: none;
-                -khtml-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-                span{
-                display: block;
-                margin-bottom: 15px;
-                }
+            .owl-prev:hover{
+                color:#e9432b;
+                right:-60px;
             }
-            .owl-dot:before{
-                margin: 0;
-                margin-bottom: 20px;
-                display: inline-block;
-                vertical-align: middle;
-                border-bottom: 1px solid transparent;
-                line-height: 1em;
-            }
-            .owl-dot:after{
-                    content: "";
-                    position: absolute;
-                    width: 2px;
-                    height: 0;
-                    top:50%;
-                    left: 50%;
-                    margin-left: -1px;
-                    box-shadow: inset 0 0 0 5px;
-                    -webkit-transition: all 0.3s ease;
-                    -moz-transition: all 0.3s ease;
-                    -o-transition: all 0.3s ease;
-                    -ms-transition: all 0.3s ease;
-                    transition: all 0.3s ease;
-            }
-            .active{
-                padding-bottom: 15px;
-                opacity: 1;
-            }
-            .active:before{
-                opacity:1;
-            }
-            .active:after{
-                height:15px;
+            .owl-next:hover{
+                color:#e9432b;
+                left:-5px;
             }
         }
-    }
-    .next-slide{
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        height: 110px;
-        width: 112px;
-        background-size: cover;
-        background-position: 50%;
-        cursor: pointer;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        -ms-transition: all 0.3s ease;
-        transition: all 0.3s ease;
     }
 }
 </style>
