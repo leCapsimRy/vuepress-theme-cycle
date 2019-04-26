@@ -26,6 +26,7 @@
 body{
     overflow-x: hidden;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch
 }
 .header-anchor{
     visibility: hidden;
@@ -122,6 +123,17 @@ body{
 }
 //全局自适应
 @media (max-width: 992px) {
+    html{
+        overflow: auto;
+        padding:0;
+        margin:0;
+        box-sizing: border-box;
+        height:100%;
+    }
+    body{
+        height:100%;
+        position: relative;
+    }
     .carousel{
         width:90%;
         height:53%;

@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-cycle",
-  "version": "0.7.0",
+  "version": "0.7.5",
   "description": "Vuepress theme - Cycle",
   "main": "index.js",
   "scripts": {
