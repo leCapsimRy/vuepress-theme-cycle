@@ -31,6 +31,7 @@ export default {
     .site{
         float:left;
         .logo-text{
+            font-family:'cycle';
             color:#18191b;
             font-size: 32px;
             writing-mode:vertical-lr;

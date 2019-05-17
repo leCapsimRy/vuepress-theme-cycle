@@ -9,8 +9,9 @@
                     class="pi-w"
                     @click="handlePreview('../images/posts/'+blog.frontmatter.title+'.jpg')">
                         <router-link 
-                        to="" 
+                        to=""
                         :style="{'backgroundImage': 'url(../images/posts/'+blog.frontmatter.title+'.jpg)'}">
+                        <!-- <img v-lazy="'../images/posts/'+blog.frontmatter.title+'.jpg'" alt=""> -->
                         </router-link>
                     </div>
                     <div class="pi-bottom">
@@ -169,6 +170,12 @@ export default {
                         background-position: 50%;
                         z-index: -1;
                         cursor: pointer;
+                        // img{
+                        //     float: left;
+                        //     width: 100%;
+                        //     height: 100%;
+                        //     object-fit: cover;
+                        // }
                     }
                 }
                 .pi-w:hover{

@@ -35,6 +35,7 @@ export default {
         .site{
             position: absolute;
             .logo-text{
+                font-family:'cycle';
                 color:#18191b;
                 font-size: 32px;
                 writing-mode:vertical-lr;
@@ -64,6 +65,7 @@ export default {
                 left: 4px;
             }
             p{
+                font-family:'cycle';
                 color:#a7abb3;
                 position: absolute;
                 // top:73px;

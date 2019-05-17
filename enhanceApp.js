@@ -5,10 +5,11 @@
 
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less'
+import VueLazyload from 'vue-lazyload'
 
 import 'animate.css'
 import './styles/index.less'
-import './fonts/zcool.less'
+import './fonts/fonts.less'
 
 export default ({
   Vue, // VuePress 正在使用的 Vue 构造函数
@@ -17,5 +18,6 @@ export default ({
   siteData // 站点元数据
 }) => {
   // ...做一些其他的应用级别的优化
-  Vue.use(Antd)
+  Vue.use(Antd),
+  Vue.use(VueLazyload)
 }

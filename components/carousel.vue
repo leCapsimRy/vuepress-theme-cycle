@@ -16,7 +16,9 @@
                   :style="{'width':data[3]+'px'}">
                       <div class="item">
                             <div class="a-img">
-                                <div :style="{'backgroundImage': 'url(images/posts/'+carousel.frontmatter.title+'.jpg)'}"></div>
+                                <div>
+                                    <img v-lazy="'images/posts/'+carousel.frontmatter.title+'.jpg'" alt="">
+                                </div>
                             </div>
                             <!-- <div class="btn" @click="infoShow(carousel)">
                                 <a-icon type="plus-circle" />
@@ -234,6 +236,12 @@ export default {
                                 -o-transition: all 0.5s ease;
                                 -ms-transition: all 0.5s ease;
                                 transition: all 0.5s ease;
+                                img{
+                                    float: left;
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
                             }
                         }
                         .btn{

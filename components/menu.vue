@@ -129,6 +129,7 @@ export default {
             transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), padding 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
             writing-mode: vertical-rl;
             a{
+                font-family:'cycle';
                 color:#fff;
                 -webkit-text-stroke: 0.1px #18191b;
                 text-decoration: none;
@@ -199,6 +200,7 @@ export default {
                 top: 23px;
             }
             a{
+                font-family:'cycle';
                 color:#fff;
                 -webkit-text-stroke: 0.1px #18191b;
                 text-decoration: none;
