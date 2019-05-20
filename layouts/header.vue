@@ -26,34 +26,3 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-#layout-header{
-    background:rgba(0,0,0,0);
-    position: absolute;
-    left: 0;
-    right: 0;
-    z-index: 100;
-    min-height: 60px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    .header{
-        background:rgba(0,0,0,0);
-        position: relative;
-        margin-right: auto;
-        margin-left: auto;
-        max-width: 100%;
-        
-    }
-    .normal-header{
-        top: 0;
-        margin:0 72px 0 120px;
-    }
-    .post-header{
-        top: -55px;
-    }
-}
-</style>
-

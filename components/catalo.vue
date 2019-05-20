@@ -14,24 +14,4 @@
     </a-affix>
   </div>
 </template>
-<style lang="less" scoped>
-.catalo{
-  position: absolute;
-  top:549px;
-  right:60px;
-  z-index:1;
-  .title{
-    position: absolute;
-    top: -32px;
-    font-size: 20px;
-    font-weight: bold;
-    left: -20px;
-    width: 100%;
-    text-align: left;
-  }
-  .anchor{
-    float: left;
-  }
-}
-</style>
 

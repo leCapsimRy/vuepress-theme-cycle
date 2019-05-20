@@ -90,31 +90,3 @@ export default {
     }
 }
 </script>
-<style lang="less" scoped>
-.logo{
-  height: 31px;
-  color:#000;
-  margin:75px 28px 16px 0;
-  float: left;
-  line-height: 31px;
-  margin-left: 120px;
-  .bars{
-    font-size:18px;
-    cursor: pointer;
-    margin-right: 10px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-  .bars:hover{
-    color:#e9432b;
-  }
-  .text{
-    font-size:1.459em;
-    color:#000;
-    text-decoration: none;
-  }
-}
-</style>
