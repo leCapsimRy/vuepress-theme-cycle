@@ -1,6 +1,6 @@
 {
   "name": "vuepress-theme-cycle",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "Vuepress theme - Cycle",
   "main": "index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "querystring": "^0.2.0"
   },
   "devDependencies": {
-    "vuepress": "^0.14.10",
+    "vuepress": "^1.0.1",
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "vue-lazyload": "^1.2.6",
