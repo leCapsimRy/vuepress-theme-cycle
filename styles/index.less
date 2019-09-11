@@ -282,15 +282,21 @@ body{
 .story{
     background:rgba(0,0,0,0);
     padding-top:20em;
-    height:calc(~'100vh - 48px');
+    min-height:calc(~'100vh - 48px');
     position: relative;
     .container{
-        background:rgba(0,0,0,0);
-        width:auto;
-        overflow-x: scroll;
-        overflow-y: hidden;
-        height:calc(~'100% - 120px');
-        white-space:nowrap;
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: justify;
+        width:100%;
+        padding:0 30px;
+        .content{
+            margin-bottom: 35px;
+            p{
+                color: #52555a;
+            }
+        }
     }
 }
 // vblog.vue
@@ -851,6 +857,7 @@ body{
             z-index:1;
             position: relative;
             text-decoration: none;
+            height:110px;
         }
         .circle{
             width:16px;
@@ -1734,6 +1741,13 @@ body{
             line-height: 30px;
         }
     }
+    //story
+    .story{
+        padding-top:20em;
+        .container{
+            padding:0 300px;
+        }
+    }
 }
 @media (min-width: 1200px) {
     .carousel{
@@ -1849,6 +1863,13 @@ body{
             width:30px;
             height:30px;
             line-height: 30px;
+        }
+    }
+    //story
+    .story{
+        padding-top:20em;
+        .container{
+            padding:0 300px;
         }
     }
 }
